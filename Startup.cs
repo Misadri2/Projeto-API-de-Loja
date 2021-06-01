@@ -5,8 +5,10 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.AspNetCore.Mvc.NewtonsoftJson;
-
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace Desafio_API_GFT
 {
@@ -24,11 +26,33 @@ namespace Desafio_API_GFT
         {
             services.AddDbContext<ApplicationDbContext>(options => options.UseMySql(Configuration.GetConnectionString("DefaultConnection")));
 
-             //Swagger
-           services.AddSwaggerGen(config => {
-                config.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title="API de Sistema", Version = "v1"});
-            }); 
-           
+            services.AddIdentity<IdentityUser, IdentityRole>()
+                     .AddRoles<IdentityRole>()
+                   .AddEntityFrameworkStores<ApplicationDbContext>()
+                   .AddDefaultTokenProviders();
+
+            string chaveDeSeguranca = "Gft_melhor_empresa12345"; // Chave de segurança
+            var chaveSimetrica = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(chaveDeSeguranca));
+
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
+            {
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidateIssuerSigningKey = true,
+                    ValidIssuer = "starters.com",
+                    ValidAudience = "usuario_comum",
+                    IssuerSigningKey = chaveSimetrica
+                };
+            });
+
+            //Swagger
+            services.AddSwaggerGen(config =>
+            {
+                config.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "API de Sistema", Version = "v1" });
+            });
+
             services.AddControllers()
                     .AddNewtonsoftJson(options =>   //Used to get the related data
                     {
@@ -55,6 +79,7 @@ namespace Desafio_API_GFT
                 config.SwaggerEndpoint("/swagger/v1/swagger.json", "v1 docs");
             });
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

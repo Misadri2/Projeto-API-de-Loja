@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using Desafio_API_GFT.Models;
 
 namespace Desafio_API_GFT.Validacao
 {

@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Desafio_API_GFT.Database;
 using Desafio_API_GFT.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -9,6 +10,7 @@ namespace Desafio_API_GFT.Controllers
 {
     [Route("api/v1/[controller]")]
     [ApiController]
+    [Authorize(AuthenticationSchemes = "Bearer")]
     public class CompraController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
@@ -47,6 +49,6 @@ namespace Desafio_API_GFT.Controllers
             _context.SaveChanges();
 
             return Ok();
-        }
+        }       
     }
 }

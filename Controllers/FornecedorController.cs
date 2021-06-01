@@ -2,14 +2,17 @@ using System.Collections.Generic;
 using System.Linq;
 using Desafio_API_GFT.Database;
 using Desafio_API_GFT.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace Desafio_API_GFT.Controllers
 {
-
-     [Route("api/v1/[controller]")]              
-    [ApiController]  
+    
+    [Route("api/v1/[controller]")]              
+    [ApiController]   
+    [Authorize(AuthenticationSchemes = "Bearer")]
+    
     public class FornecedorController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
@@ -18,11 +21,13 @@ namespace Desafio_API_GFT.Controllers
             _context = context;
         }
 
+       
         [HttpGet]
         public ActionResult<IEnumerable<Fornecedor>> Get(){    
            return _context.Fornecedor.ToList();
         }  
 
+     
         [HttpGet("{id}")]
         public ActionResult<Fornecedor> Get(int id)
         {
@@ -33,7 +38,9 @@ namespace Desafio_API_GFT.Controllers
                 return NotFound();
             }
             return fornecedor;
-        }   
+        }
+
+       
         [HttpPost]
         public ActionResult Post([FromBody]Fornecedor fornecedor)
         {
@@ -49,6 +56,7 @@ namespace Desafio_API_GFT.Controllers
             return Ok();
         }
          
+      
         [HttpPut("{id}")]
         public ActionResult Put(int id, [FromBody] Fornecedor fornecedor)
         {
@@ -63,6 +71,7 @@ namespace Desafio_API_GFT.Controllers
             return Ok();
         }
         
+      
         [HttpDelete("{id}")]
         public ActionResult<Fornecedor> Delete(int id)
         {

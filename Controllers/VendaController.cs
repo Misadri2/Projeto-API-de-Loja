@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Desafio_API_GFT.Database;
 using Desafio_API_GFT.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -9,6 +10,8 @@ namespace Desafio_API_GFT.Controllers
 {
     [Route("api/v1/[controller]")]
     [ApiController]
+    [Authorize(AuthenticationSchemes = "Bearer")]
+   
     public class VendaController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
@@ -17,7 +20,7 @@ namespace Desafio_API_GFT.Controllers
             _context = context;
         }
        
-
+        [Authorize]
         [HttpGet]
         public ActionResult<IEnumerable<Venda>> GetItensVendas()
         {
@@ -35,6 +38,7 @@ namespace Desafio_API_GFT.Controllers
             }
             return venda;
         }
+
         [HttpPost]
         public ActionResult Post([FromBody] Venda venda)
         {
@@ -49,6 +53,7 @@ namespace Desafio_API_GFT.Controllers
 
             return Ok();
         }
+        
         [HttpPut("{id}")]
         public ActionResult Put(int id, [FromBody] Venda venda)
         {
