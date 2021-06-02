@@ -10,7 +10,7 @@ namespace Desafio_API_GFT.Controllers
 {
     [Route("api/v1/[controller]")]
     [ApiController]
-    [Authorize(AuthenticationSchemes = "Bearer")]
+   /*  [Authorize(AuthenticationSchemes = "Bearer")] */
    
     public class VendaController : ControllerBase
     {
@@ -20,7 +20,7 @@ namespace Desafio_API_GFT.Controllers
             _context = context;
         }
        
-        [Authorize]
+     
         [HttpGet]
         public ActionResult<IEnumerable<Venda>> GetItensVendas()
         {

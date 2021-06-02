@@ -10,8 +10,9 @@ namespace Desafio_API_GFT.Controllers
 {
     
     [Route("api/v1/[controller]")]              
-    [ApiController]   
-    [Authorize(AuthenticationSchemes = "Bearer")]
+    [ApiController] 
+    [Authorize(Roles = "Loja")]  
+   /*  [Authorize(AuthenticationSchemes = "Bearer")] */
     
     public class FornecedorController : ControllerBase
     {
@@ -53,7 +54,7 @@ namespace Desafio_API_GFT.Controllers
             _context.Fornecedor.Add(fornecedor);
             _context.SaveChanges();
 
-            return Ok();
+            return Ok(new { msg = "Você cadastrou um novo fornecedor" });
         }
          
       

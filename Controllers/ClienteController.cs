@@ -12,7 +12,7 @@ namespace Desafio_API_GFT.Controllers
     [Route("api/v1/[controller]")]  //https://localhost:5001/swagger/index.html
     [ApiController]
     [Authorize(AuthenticationSchemes = "Bearer")]
-    /* [Authorize(Roles = "Cliente")] */
+
 
     public class ClienteController : ControllerBase
     {
@@ -22,16 +22,13 @@ namespace Desafio_API_GFT.Controllers
             _context = context;
         }
 
-
-
         [HttpGet]
         public ActionResult<IEnumerable<Cliente>> Get()
         {
             return _context.Cliente.ToList();
         }
 
-
-
+        [HttpGet("{id}")]
         public ActionResult<Cliente> Get(int id)
         {
             var cliente = _context.Cliente.FirstOrDefault(p => p.IdCliente == id);
@@ -45,7 +42,7 @@ namespace Desafio_API_GFT.Controllers
 
 
         [HttpPost]
-        public IActionResult Post([FromBody] Cliente cliente)
+        public ActionResult Post([FromBody] Cliente cliente)
         {
             //validação//
             if (cliente.Nome.Length <= 1)
@@ -91,6 +88,5 @@ namespace Desafio_API_GFT.Controllers
             _context.SaveChanges();
             return cliente;
         }
-        
     }
 }

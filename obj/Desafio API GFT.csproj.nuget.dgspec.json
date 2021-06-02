@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\MAON\\Projetos\\Desafio API GFT\\Desafio API GFT.csproj": {}
+    "C:\\Users\\MAON\\Projetos\\desafio-gft-api\\Desafio API GFT.csproj": {}
   },
   "projects": {
-    "C:\\Users\\MAON\\Projetos\\Desafio API GFT\\Desafio API GFT.csproj": {
+    "C:\\Users\\MAON\\Projetos\\desafio-gft-api\\Desafio API GFT.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\MAON\\Projetos\\Desafio API GFT\\Desafio API GFT.csproj",
+        "projectUniqueName": "C:\\Users\\MAON\\Projetos\\desafio-gft-api\\Desafio API GFT.csproj",
         "projectName": "Desafio API GFT",
-        "projectPath": "C:\\Users\\MAON\\Projetos\\Desafio API GFT\\Desafio API GFT.csproj",
+        "projectPath": "C:\\Users\\MAON\\Projetos\\desafio-gft-api\\Desafio API GFT.csproj",
         "packagesPath": "C:\\Users\\MAON\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\MAON\\Projetos\\Desafio API GFT\\obj\\",
+        "outputPath": "C:\\Users\\MAON\\Projetos\\desafio-gft-api\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

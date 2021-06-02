@@ -20,23 +20,25 @@ namespace Desafio_API_GFT.Controllers
         public UsuarioController(ApplicationDbContext context)
         {
             _context = context;
-        }
-          
+        }          
         
         [HttpGet]
-        public ActionResult<string> Get()
+       public ActionResult<IEnumerable<Usuario>> Get()
         {
-            return "AutorizaController ::  Acessado em  : "
-               + DateTime.Now.ToLongDateString();
+            return  _context.Usuario.ToList();
         }
 
         [HttpPost("registro")]
         //api/v1/usuario/registro
-        public IActionResult Registro([FromBody] Usuario usuario)    {
-            
-            _context.Add(usuario);
-            _context.SaveChanges();
-            return Ok(new { msg = "Usuário cadastrado com sucesso" });
+        public IActionResult Registro([FromBody] Usuario usuario){
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }       
+                _context.Add(usuario);
+                _context.SaveChanges();
+                return Ok(new { msg = "Usuário cadastrado com sucesso" });
+           
         }
 
         [HttpPost("Login")]

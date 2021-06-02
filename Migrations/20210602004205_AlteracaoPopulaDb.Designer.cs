@@ -3,14 +3,16 @@ using System;
 using Desafio_API_GFT.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Desafio_API_GFT.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210602004205_AlteracaoPopulaDb")]
+    partial class AlteracaoPopulaDb
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -346,22 +348,6 @@ namespace Desafio_API_GFT.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Usuario");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Email = "Loja@loja.com",
-                            Senha = "GFT2021",
-                            TypeUser = 0
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Email = "Cliente@cliente.com",
-                            Senha = "GFT2021",
-                            TypeUser = 1
-                        });
                 });
 
             modelBuilder.Entity("Desafio_API_GFT.Models.Venda", b =>
@@ -425,15 +411,15 @@ namespace Desafio_API_GFT.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "2a5aee85-ddf8-4f3c-8fa3-a0781da533bc",
-                            ConcurrencyStamp = "3f208c5c-412c-49c9-8563-38171f63be4a",
+                            Id = "73948ff5-ca31-4643-a702-f204073d5c91",
+                            ConcurrencyStamp = "35a5470f-1c1f-41f5-b83d-0110a297fd1f",
                             Name = "Loja",
                             NormalizedName = "LOJA"
                         },
                         new
                         {
-                            Id = "7a290fdf-ee19-43e4-8e44-4af7de2cfddf",
-                            ConcurrencyStamp = "4b41f5d7-f7dc-4d7b-957c-ba809f082093",
+                            Id = "c3acfe5d-9097-45c8-94fe-832b75eb12b3",
+                            ConcurrencyStamp = "5f65cdd9-5a65-4e7b-ac32-ab63a019a63e",
                             Name = "Cliente",
                             NormalizedName = "CLIENTE"
                         });

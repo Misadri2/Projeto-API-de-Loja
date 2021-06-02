@@ -11,7 +11,7 @@ namespace Desafio_API_GFT.Controllers
 
     [Route("api/v1/[controller]")]
     [ApiController]
-    [Authorize(AuthenticationSchemes = "Bearer")]
+  /*   [Authorize(AuthenticationSchemes = "Bearer")] */
 
     public class ProdutoController : ControllerBase
     {
@@ -27,7 +27,7 @@ namespace Desafio_API_GFT.Controllers
             return _context.Produto.ToList();
         }
 
-        [Authorize]
+       
         // api/produtos/1
         [HttpGet("{id}", Name = "ObterProduto")]
         public ActionResult<Produto> Get(int id)
@@ -41,8 +41,7 @@ namespace Desafio_API_GFT.Controllers
             }
             return produto;
         }
-
-        [Authorize]
+       
         //  api/produtos
         [HttpPost]
         public ActionResult Post([FromBody] Produto produto)
@@ -56,10 +55,10 @@ namespace Desafio_API_GFT.Controllers
             _context.Produto.Add(produto);
             _context.SaveChanges();
 
-            return Ok();
+            return Ok(new { msg = "Você cadastrou um novo produto" });
         }
 
-        [Authorize]
+      
         [HttpPut("{id}")]
         public ActionResult Put(int id, [FromBody] Produto produto)
         {
@@ -74,7 +73,7 @@ namespace Desafio_API_GFT.Controllers
             return Ok();
         }
 
-        [Authorize]
+
         [HttpDelete("{id}")]
         public ActionResult<Produto> Delete(int id)
         {

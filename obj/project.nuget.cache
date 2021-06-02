@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "w5Hrc13632Iwm9WYjc9+DMlERaACrzFdSDT8GAPDF8RgVPGZ5gBfqo0CG9y7IYb1XPd27wB0nzfYc8KdHY+ZDQ==",
+  "dgSpecHash": "KvDtfLl9VezdesqiLWI0EgnOxk8WjAYwOuTN/9aEA2jouqSeemctJd43GK70HefvOAJg6AGB8Jfw1fCp1GqCIg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\MAON\\Projetos\\Desafio API GFT\\Desafio API GFT.csproj",
+  "projectFilePath": "C:\\Users\\MAON\\Projetos\\desafio-gft-api\\Desafio API GFT.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\MAON\\.nuget\\packages\\microsoft.aspnetcore.authentication\\2.2.0\\microsoft.aspnetcore.authentication.2.2.0.nupkg.sha512",
     "C:\\Users\\MAON\\.nuget\\packages\\microsoft.aspnetcore.authentication.abstractions\\2.2.0\\microsoft.aspnetcore.authentication.abstractions.2.2.0.nupkg.sha512",

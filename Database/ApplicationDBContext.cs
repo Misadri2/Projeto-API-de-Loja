@@ -37,6 +37,11 @@ namespace Desafio_API_GFT.Database
                 NormalizedName = "Cliente".ToUpper()
             });
 
+            var usuario = new[]{
+              new Usuario {Id=1, Email= "Loja@loja.com", Senha="GFT2021", TypeUser=(Models.Enum.PerfilUsuario)0 },
+              new Usuario {Id=2, Email= "Cliente@cliente.com", Senha="GFT2021", TypeUser=(Models.Enum.PerfilUsuario)1}
+            };
+
             var fornecedor = new[]{
               new Fornecedor {IdFornecedor=1, CNPJ="11.815.158/0001-36", Nome="Dolly", Telefone="11-9988-7766", Email="fornecedor@dolly.com", Endereco="Avenida Paulista, 2000, Centro, São Paulo, SP, cep 02764-010" },
               new Fornecedor {IdFornecedor=2, CNPJ="14.878.074/0001-30", Nome="Ambev", Telefone="11-9668-7766", Email="fornecedor@ambev.com", Endereco="Beco do Miro, 2000, Mangueira, Rio de Janeiro, RJ, cep 20911-138"},
@@ -55,6 +60,7 @@ namespace Desafio_API_GFT.Database
             modelBuilder.Entity<Fornecedor>().HasData(fornecedor[0], fornecedor[1]);
             modelBuilder.Entity<Cliente>().HasData(cliente[0], cliente[1]);
             modelBuilder.Entity<Estoque>().HasData(estoque[0], estoque[1]);
+            modelBuilder.Entity<Usuario>().HasData(usuario[0], usuario[1]);
 
 
             modelBuilder.Entity<Produto>().HasData(new { IdProduto = 1, Descricao = "DollyGuaraná", Unidade = "UN", EstoqueId = 1 });

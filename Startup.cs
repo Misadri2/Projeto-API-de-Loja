@@ -31,7 +31,14 @@ namespace Desafio_API_GFT
                    .AddEntityFrameworkStores<ApplicationDbContext>()
                    .AddDefaultTokenProviders();
 
-            string chaveDeSeguranca = "Gft_melhor_empresa12345"; // Chave de segurança
+            //Swagger
+            services.AddSwaggerGen(config =>
+            {
+                config.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "API de REFRIGERANTES", Version = "v1" });
+            });
+
+            // Chave de segurança
+            string chaveDeSeguranca = "Gft_melhor_empresa12345"; 
             var chaveSimetrica = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(chaveDeSeguranca));
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
@@ -46,12 +53,7 @@ namespace Desafio_API_GFT
                     IssuerSigningKey = chaveSimetrica
                 };
             });
-
-            //Swagger
-            services.AddSwaggerGen(config =>
-            {
-                config.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "API de Sistema", Version = "v1" });
-            });
+            
 
             services.AddControllers()
                     .AddNewtonsoftJson(options =>   //Used to get the related data
@@ -78,6 +80,7 @@ namespace Desafio_API_GFT
             {
                 config.SwaggerEndpoint("/swagger/v1/swagger.json", "v1 docs");
             });
+            app.UseDeveloperExceptionPage();
 
             app.UseAuthentication();
             app.UseAuthorization();
