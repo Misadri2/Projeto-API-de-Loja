@@ -10,7 +10,9 @@ namespace Desafio_API_GFT.Controllers
 {
     [Route("api/v1/[controller]")]
     [ApiController]
-    /* [Authorize(AuthenticationSchemes = "Bearer")] */
+    [Authorize(AuthenticationSchemes = "Bearer")]     
+
+
     public class CompraController : ControllerBase
     {
         private readonly ApplicationDbContext _context;

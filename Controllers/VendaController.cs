@@ -10,8 +10,8 @@ namespace Desafio_API_GFT.Controllers
 {
     [Route("api/v1/[controller]")]
     [ApiController]
-   /*  [Authorize(AuthenticationSchemes = "Bearer")] */
-   
+    [Authorize(AuthenticationSchemes = "Bearer")]
+
     public class VendaController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
@@ -19,8 +19,8 @@ namespace Desafio_API_GFT.Controllers
         {
             _context = context;
         }
-       
-     
+
+
         [HttpGet]
         public ActionResult<IEnumerable<Venda>> GetItensVendas()
         {
@@ -53,7 +53,7 @@ namespace Desafio_API_GFT.Controllers
 
             return Ok();
         }
-        
+
         [HttpPut("{id}")]
         public ActionResult Put(int id, [FromBody] Venda venda)
         {

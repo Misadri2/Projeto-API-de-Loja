@@ -11,7 +11,7 @@ namespace Desafio_API_GFT.Controllers
 
     [Route("api/v1/[controller]")]
     [ApiController]
-  /*   [Authorize(AuthenticationSchemes = "Bearer")] */
+    [Authorize(AuthenticationSchemes = "Bearer")]
 
     public class ProdutoController : ControllerBase
     {
@@ -21,13 +21,14 @@ namespace Desafio_API_GFT.Controllers
             _context = context;
         }
 
+        [AllowAnonymous]
         [HttpGet]
         public ActionResult<IEnumerable<Produto>> Get()
         {
             return _context.Produto.ToList();
         }
 
-       
+
         // api/produtos/1
         [HttpGet("{id}", Name = "ObterProduto")]
         public ActionResult<Produto> Get(int id)
@@ -41,7 +42,7 @@ namespace Desafio_API_GFT.Controllers
             }
             return produto;
         }
-       
+
         //  api/produtos
         [HttpPost]
         public ActionResult Post([FromBody] Produto produto)
@@ -58,7 +59,7 @@ namespace Desafio_API_GFT.Controllers
             return Ok(new { msg = "Você cadastrou um novo produto" });
         }
 
-      
+
         [HttpPut("{id}")]
         public ActionResult Put(int id, [FromBody] Produto produto)
         {

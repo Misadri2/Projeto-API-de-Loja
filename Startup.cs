@@ -9,15 +9,19 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using Microsoft.OpenApi.Models;
+using System;
 
 namespace Desafio_API_GFT
 {
     public class Startup
     {
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
         }
+
 
         public IConfiguration Configuration { get; }
 
@@ -31,14 +35,8 @@ namespace Desafio_API_GFT
                    .AddEntityFrameworkStores<ApplicationDbContext>()
                    .AddDefaultTokenProviders();
 
-            //Swagger
-            services.AddSwaggerGen(config =>
-            {
-                config.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "API de REFRIGERANTES", Version = "v1" });
-            });
-
             // Chave de segurança
-            string chaveDeSeguranca = "Gft_melhor_empresa12345"; 
+            string chaveDeSeguranca = "Gft_melhor_empresa12345";
             var chaveSimetrica = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(chaveDeSeguranca));
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
@@ -53,7 +51,33 @@ namespace Desafio_API_GFT
                     IssuerSigningKey = chaveSimetrica
                 };
             });
-            
+
+            services.AddSwaggerGen(config =>
+            {
+                config.SwaggerDoc("v1", new OpenApiInfo() { Title = "WebAPI", Version = "v1" });
+                config.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                {
+                    Name = "Authorization",
+                    In = ParameterLocation.Header,
+                    Type = SecuritySchemeType.Http,
+                    Scheme = "Bearer",
+                    BearerFormat = "JWT"
+                });
+                config.AddSecurityRequirement(new OpenApiSecurityRequirement
+                {
+                    {
+                        new OpenApiSecurityScheme
+                        {
+                            Reference = new OpenApiReference
+                            {
+                                Type = ReferenceType.SecurityScheme,
+                                Id = "Bearer"
+                            }
+                        },
+                        Array.Empty<string>()
+                    }
+                });
+            });
 
             services.AddControllers()
                     .AddNewtonsoftJson(options =>   //Used to get the related data
@@ -61,34 +85,37 @@ namespace Desafio_API_GFT
                         options.SerializerSettings.ReferenceLoopHandling
                         = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
                     });
+            
+                
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
-        {
-            if (env.IsDevelopment())
+            // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+            public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
             {
+                if (env.IsDevelopment())
+                {
+                    app.UseDeveloperExceptionPage();
+                }
+
+                app.UseHttpsRedirection();
+
+                app.UseRouting();
+                //Swagger
+                app.UseSwagger();
+                app.UseSwaggerUI(config =>
+                    {
+                        config.SwaggerEndpoint("/swagger/v1/swagger.json", "v1 docs"); 
+                        config.RoutePrefix = string.Empty;
+                    });
                 app.UseDeveloperExceptionPage();
-            }
 
-            app.UseHttpsRedirection();
+                app.UseAuthentication();
+                app.UseAuthorization();
 
-            app.UseRouting();
-            //Swagger
-            app.UseSwagger();
-            app.UseSwaggerUI(config =>
-            {
-                config.SwaggerEndpoint("/swagger/v1/swagger.json", "v1 docs");
-            });
-            app.UseDeveloperExceptionPage();
-
-            app.UseAuthentication();
-            app.UseAuthorization();
-
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-            });
-        }
+                app.UseEndpoints(endpoints =>
+                {
+                    endpoints.MapControllers();
+                });
+        }        
     }
 }

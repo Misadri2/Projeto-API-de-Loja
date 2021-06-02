@@ -8,12 +8,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Desafio_API_GFT.Controllers
 {
-    
-    [Route("api/v1/[controller]")]              
-    [ApiController] 
-    [Authorize(Roles = "Loja")]  
-   /*  [Authorize(AuthenticationSchemes = "Bearer")] */
-    
+
+    [Route("api/v1/[controller]")]
+    [ApiController]
+    [Authorize(AuthenticationSchemes = "Bearer")]
+
     public class FornecedorController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
@@ -22,13 +21,14 @@ namespace Desafio_API_GFT.Controllers
             _context = context;
         }
 
-       
-        [HttpGet]
-        public ActionResult<IEnumerable<Fornecedor>> Get(){    
-           return _context.Fornecedor.ToList();
-        }  
 
-     
+        [HttpGet]
+        public ActionResult<IEnumerable<Fornecedor>> Get()
+        {
+            return _context.Fornecedor.ToList();
+        }
+
+
         [HttpGet("{id}")]
         public ActionResult<Fornecedor> Get(int id)
         {
@@ -41,11 +41,11 @@ namespace Desafio_API_GFT.Controllers
             return fornecedor;
         }
 
-       
+
         [HttpPost]
-        public ActionResult Post([FromBody]Fornecedor fornecedor)
+        public ActionResult Post([FromBody] Fornecedor fornecedor)
         {
-         
+
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -56,12 +56,12 @@ namespace Desafio_API_GFT.Controllers
 
             return Ok(new { msg = "Você cadastrou um novo fornecedor" });
         }
-         
-      
+
+
         [HttpPut("{id}")]
         public ActionResult Put(int id, [FromBody] Fornecedor fornecedor)
         {
-           
+
             if (id != fornecedor.IdFornecedor)
             {
                 return BadRequest();
@@ -71,12 +71,12 @@ namespace Desafio_API_GFT.Controllers
             _context.SaveChanges();
             return Ok();
         }
-        
-      
+
+
         [HttpDelete("{id}")]
         public ActionResult<Fornecedor> Delete(int id)
         {
-           
+
             var fornecedor = _context.Fornecedor.FirstOrDefault(p => p.IdFornecedor == id);
 
             if (fornecedor == null)
@@ -87,6 +87,6 @@ namespace Desafio_API_GFT.Controllers
             _context.Fornecedor.Remove(fornecedor);
             _context.SaveChanges();
             return fornecedor;
-        }       
+        }
     }
 }
