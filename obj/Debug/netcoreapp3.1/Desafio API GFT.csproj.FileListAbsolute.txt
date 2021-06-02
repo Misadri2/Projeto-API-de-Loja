@@ -270,3 +270,6 @@ C:\Users\MAON\Projetos\desafio-gft-api\obj\Debug\netcoreapp3.1\staticwebassets\D
 C:\Users\MAON\Projetos\desafio-gft-api\obj\Debug\netcoreapp3.1\Desafio API GFT.dll
 C:\Users\MAON\Projetos\desafio-gft-api\obj\Debug\netcoreapp3.1\Desafio API GFT.pdb
 C:\Users\MAON\Projetos\desafio-gft-api\obj\Debug\netcoreapp3.1\Desafio API GFT.genruntimeconfig.cache
+C:\Users\MAON\Projetos\desafio-gft-api\bin\Debug\netcoreapp3.1\MailKit.dll
+C:\Users\MAON\Projetos\desafio-gft-api\bin\Debug\netcoreapp3.1\MimeKit.dll
+C:\Users\MAON\Projetos\desafio-gft-api\bin\Debug\netcoreapp3.1\BouncyCastle.Crypto.dll

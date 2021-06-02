@@ -61,12 +61,15 @@ namespace Desafio_API_GFT.Controllers
                         claims.Add(new Claim("id", usuario.Id.ToString()));
                         claims.Add(new Claim("email", usuario.Email.ToString()));
                         claims.Add(new Claim(ClaimTypes.Role, "Loja"));                
-                        claims.Add(new Claim(ClaimTypes.Role, "Cliente"));                
+                        claims.Add(new Claim(ClaimTypes.Role, "Cliente")); 
+
+                        var IdentityClaims =new ClaimsIdentity();
+                        IdentityClaims.AddClaims(claims);               
                         
                         var JWT = new JwtSecurityToken(
                             issuer: "starters.com",  //Quem está fornecendo o JWT para o usuário
                             expires: DateTime.Now.AddHours(1),
-                            audience: "usuario_comum",
+                            audience: "usuario_comum",                            
                             signingCredentials: credenciaisDeAcesso,
                             claims: claims   // adicionando claims no token
                         );

@@ -40,7 +40,7 @@ namespace Desafio_API_GFT.Controllers
             return cliente;
         }
 
-
+        [AllowAnonymous]
         [HttpPost]
         public ActionResult Post([FromBody] Cliente cliente)
         {

@@ -38,7 +38,7 @@ namespace Desafio_API_GFT.Controllers
             }
             return venda;
         }
-
+        
         [HttpPost]
         public ActionResult Post([FromBody] Venda venda)
         {

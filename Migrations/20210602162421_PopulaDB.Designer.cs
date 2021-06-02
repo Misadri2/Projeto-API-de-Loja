@@ -3,14 +3,16 @@ using System;
 using Desafio_API_GFT.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Desafio_API_GFT.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210602162421_PopulaDB")]
+    partial class PopulaDB
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -208,7 +210,7 @@ namespace Desafio_API_GFT.Migrations
                             Id = 1,
                             CompraId = 1,
                             Produto = "Fanta",
-                            Quantidade = 75,
+                            Quantidade = 150,
                             Valor = 6.5f
                         },
                         new
@@ -216,7 +218,7 @@ namespace Desafio_API_GFT.Migrations
                             Id = 2,
                             CompraId = 1,
                             Produto = "FantaUva",
-                            Quantidade = 75,
+                            Quantidade = 50,
                             Valor = 6f
                         },
                         new
@@ -421,6 +423,22 @@ namespace Desafio_API_GFT.Migrations
                         .HasName("RoleNameIndex");
 
                     b.ToTable("AspNetRoles");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "dddacccc-76a7-4743-b1b7-bc7ffc88f749",
+                            ConcurrencyStamp = "472f5c6d-36ff-41f5-98a1-ae1dce51d6a2",
+                            Name = "Loja",
+                            NormalizedName = "LOJA"
+                        },
+                        new
+                        {
+                            Id = "e9cd639e-d598-4c6e-a15e-1874badb8c94",
+                            ConcurrencyStamp = "69ef17fc-ac37-4bb1-aa45-96f275c77af6",
+                            Name = "Cliente",
+                            NormalizedName = "CLIENTE"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

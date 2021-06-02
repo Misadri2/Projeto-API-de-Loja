@@ -1,5 +1,4 @@
 using Desafio_API_GFT.Models;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -24,21 +23,10 @@ namespace Desafio_API_GFT.Database
 
         override protected void OnModelCreating(ModelBuilder modelBuilder)
         {
-            base.OnModelCreating(modelBuilder);
-
-            modelBuilder.Entity<IdentityRole>().HasData(new IdentityRole
-            {
-                Name = "Loja",
-                NormalizedName = "Loja".ToUpper()
-            });
-            modelBuilder.Entity<IdentityRole>().HasData(new IdentityRole
-            {
-                Name = "Cliente",
-                NormalizedName = "Cliente".ToUpper()
-            });
+            base.OnModelCreating(modelBuilder);            
 
             var usuario = new[]{
-              new Usuario {Id=1, Email= "Loja@loja.com", Senha="GFT2021", TypeUser=(Models.Enum.PerfilUsuario)0 },
+              new Usuario {Id=1, Email= "adm@admin.com", Senha="GFT2021", TypeUser=(Models.Enum.PerfilUsuario)0 },
               new Usuario {Id=2, Email= "Cliente@cliente.com", Senha="GFT2021", TypeUser=(Models.Enum.PerfilUsuario)1}
             };
 
@@ -81,8 +69,8 @@ namespace Desafio_API_GFT.Database
             modelBuilder.Entity<Compra>().HasData(compra[0], compra[1]);
             modelBuilder.Entity<Venda>().HasData(venda[0], venda[1]);
 
-            modelBuilder.Entity<ItemCompra>().HasData(new { Id = 1, Produto = "Fanta", Quantidade = 150, Valor = 6.50f, CompraId = 1 });
-            modelBuilder.Entity<ItemCompra>().HasData(new { Id = 2, Produto = "FantaUva", Quantidade = 50, Valor = 6.00f, CompraId = 1 });
+            modelBuilder.Entity<ItemCompra>().HasData(new { Id = 1, Produto = "Fanta", Quantidade = 75, Valor = 6.50f, CompraId = 1 });
+            modelBuilder.Entity<ItemCompra>().HasData(new { Id = 2, Produto = "FantaUva", Quantidade = 75, Valor = 6.00f, CompraId = 1 });
             modelBuilder.Entity<ItemCompra>().HasData(new { Id = 3, Produto = "DollyGuaraná", Quantidade = 100, Valor = 5.50f, CompraId = 2 });
             modelBuilder.Entity<ItemVenda>().HasData(new { Id = 1, Produto = "Fanta", Quantidade = 10, Valor = 10.00f, VendaId = 1 });
             modelBuilder.Entity<ItemVenda>().HasData(new { Id = 2, Produto = "FantaUva", Quantidade = 10, Valor = 10.00f, VendaId = 1 });

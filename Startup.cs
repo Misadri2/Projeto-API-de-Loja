@@ -11,6 +11,8 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.OpenApi.Models;
 using System;
+using desafio_gft_api.Email;
+using desafio_gft_api.Configuration;
 
 namespace Desafio_API_GFT
 {
@@ -30,6 +32,9 @@ namespace Desafio_API_GFT
         {
             services.AddDbContext<ApplicationDbContext>(options => options.UseMySql(Configuration.GetConnectionString("DefaultConnection")));
 
+            services.Configure<EmailSettings>(Configuration.GetSection("EmailSettings"));
+            services.AddTransient<IEmailService, EmailService>();
+            
             services.AddIdentity<IdentityUser, IdentityRole>()
                      .AddRoles<IdentityRole>()
                    .AddEntityFrameworkStores<ApplicationDbContext>()
@@ -50,7 +55,7 @@ namespace Desafio_API_GFT
                     ValidAudience = "usuario_comum",
                     IssuerSigningKey = chaveSimetrica
                 };
-            });
+            });        
 
             services.AddSwaggerGen(config =>
             {
